@@ -74,14 +74,14 @@ def main(args):
             "method": "random",
             "metric": {"name": "ep_rew_mean", "goal": "maximize"},
             "parameters": {
-                "lr": {"min": 5e-6, "max": 0.002},
+                "lr": {"min": 5e-6, "max": 0.005},
                 'gae_lambda':{"min": 0.9, "max": 0.99},
                 'clip-eps':dict(values=[0.1, 0.2, 0.3]), 
-                'entropy-coef': {"min": 0.0001, "max": 0.01},
+                'entropy-coef': {"min": 0.001, "max": 0.3},
                 # 'value-loss-coef':{"min": 0.5, "max": 1.0},
-                'batch_size': dict(values=[64, 128,256]),
+                'batch_size': dict(values=[64, 128, 256]),
                 'recurrence':dict(values=[1, 4, 8]),
-                'epochs':dict(values=[4, 8, 16])
+                'epochs':dict(values=[4, 10, 16])
             },
             }
     elif args.algo== 'a2c':
@@ -117,7 +117,7 @@ def train(args,seeds,devices):
                 model_name = args.model or default_model_name
                 model_name= f"{args.env}_{args.algo}_{args.cuda_id}_{run.id}"
 
-                model_dir = utils.get_model_dir(args.model,args.env, model_name)
+                model_dir = utils.get_model_dir(model_name, args.model, args.env)
 
                 # Load loggers and Tensorboard writer
 
