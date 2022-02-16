@@ -82,6 +82,7 @@ for ep in range(episodes):
         obs, reward, done, _ = env.step(action)
         # traj = np.append(traj, obs.numpy(), axis=0)
         obs_img = env.render('rgb_array', highlight=False, tile_size=args.tile_size)
+        obs_img = obs_img.transpose(1, 0, 2)  ## render uses H,W, while obs space is W,H
         ep_traj = np.append(ep_traj, obs_img[np.newaxis, ...], axis=0)
 
         rew += reward
