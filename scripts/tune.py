@@ -163,8 +163,8 @@ def train(args,seeds,devices):
                 # Load model
 
                 acmodel = ACModel(obs_space, envs[0].action_space, args.mem, args.text)
-                if "model_state" in status:
-                    acmodel.load_state_dict(status["model_state"])
+                # if "model_state" in status:
+                #     acmodel.load_state_dict(status["model_state"])
                 acmodel.to(device)
                 txt_logger.info("Model loaded\n")
                 txt_logger.info("{}\n".format(acmodel))
@@ -210,12 +210,12 @@ def train(args,seeds,devices):
                         device=device,
                         **hypes,
                         preprocess_obss=preprocess_obss)
-                    
+
                 # else:
                 #     raise ValueError("Incorrect algorithm name: {}".format(args.algo))
 
-                if "optimizer_state" in status:
-                    algo.optimizer.load_state_dict(status["optimizer_state"])
+                # if "optimizer_state" in status:
+                #     algo.optimizer.load_state_dict(status["optimizer_state"])
                 txt_logger.info("Optimizer loaded\n")
 
                 # Train model
